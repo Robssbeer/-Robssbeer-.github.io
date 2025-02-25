@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小楼夜兮上表霄，君与月兮共玲瑶。游京万灯直风起，愿傍星斗众可昭。</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .cloud {
+            position:absolute;
+            top:0px;
+            left: 0px;
+            height: 400px;
+            width: 300px;
+            background-image: url(123.gif);
+            background-size: cover;
+            background-color: #ff4949;
+        }
+        .cloud-right {
+            position:absolute;
+            top:0px;
+            right: 0px;
+            height: 400px;
+            width: 300px;
+            background-image: url(1738899613883.gif);
+            background-size: cover;
+            background-color: #ff4949;
+        }
+        .text {
+            position: absolute;
+            top: 0px;
+            line-height: 0px;
+            font-size:30px;
+            color: #fd5252;
+            text-shadow: 0 0  5px #fff,
+                0 0 15px #fff,
+                0 0 30px #fff;
+            animation: rain 1s linear forwards;       
+        }
+
+        @keyframes rain {
+            0% { transform: translateY(0) scale(1); }
+            80% { transform: translateY(230px) scale(1); }
+            100% {
+                transform: translateY(220px) scale(1.3);
+                opacity: 0;
+            }
+        }
+        
+        body {/* 设置背景渐变 */
+            background-image: linear-gradient(to left, #f6c55c, #f74444);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        .a{
+            position:relative;
+            top: 100px;
+            width: 1100px;
+            height: 550px;
+            box-shadow: 0 5px 15px rgba(0,0,0,.8);
+            display: flex;
+        }
+        .b{
+            width: 800px;
+            height: 550px;
+            background-image: url("8888.jpg");
+            /* 让图片适应大小 */
+            background-size: cover;
+        }
+        .c{
+            width: 300px;
+            height: 550px;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .d{
+            width: 250px;
+            height: 500px;
+        }
+        .d h1{
+            font: 900 30px '';
+            margin-bottom: 20px;
+        }
+        .e{
+            width: 230px;
+            margin: 20px 0;
+            outline: none;
+            border: 0;
+            padding: 10px;
+            border-bottom: 3px solid rgb(80,80,170);
+            font: 900 16px '';
+        }
+        .f{
+            float: right;
+            margin: 10px 0;
+        }
+        .g{
+            position: absolute;
+            margin: 20px;
+            bottom: 40px;
+            display: block;
+            width: 300px;
+            height: 60px;
+            font: 900 30px '';
+            text-decoration: none;
+            line-height: 50px;
+            border-radius: 30px;
+            background-image: linear-gradient(to left,
+            #9c88ff,#3cadeb);
+            text-align: center;
+        }
+
+/* 其他样式从原music.HTML复制并粘贴在此处 */
+/* 包括：.img-container, .navigation, .action-btn 等所有相关样式 */
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+
+
+.music-container {
+  background-color: #e9c8f8  !important;
+  border-radius: 15px;
+  box-shadow: 0 20px 20px 0 rgba(102, 35, 103, 0.758);
+  display: flex;
+  padding: 20px 30px;
+  position: fixed !important;
+  bottom: 20px !important;
+  left: 20px !important;
+  z-index: 1000 !important;
+}
+
+.img-container {
+  position: relative;
+  width: 110px;
+}
+
+.img-container::after {
+  content: '';
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, 50%);
+}
+
+.img-container img {
+  border-radius: 50%;
+  object-fit: cover;
+  height: 110px;
+  width: inherit;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  animation: rotate 3s linear infinite;
+  animation-play-state: paused;
+}
+
+.music-container.play .img-container img {
+  animation-play-state: running;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg);}
+  to { transform: rotate(360deg);}
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.action-btn {
+  background-color: #e9c8f8 !important; /* 与播放器主体同色 */
+  border: 0 !important; /* 移除边框 */;
+  box-shadow: none !important; /* 移除阴影 */
+  color: #e9c8f8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 10px;
+  margin: 0 20px;
+}
+
+.action-btn-big {
+  color: #e9c8f8;
+  font-size: 30px;
+}
+
+.action-btn:focus {
+  outline: 0;
+}
+
+/* 修复按钮悬浮/点击时的颜色 */
+.action-btn:hover {
+  background-color: #d8a9f0 !important;
+}
+
+.action-btn:active {
+  background-color: #c590e3 !important;
+}
+
+.music-info {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 15px 15px 0 0;
+  position: absolute;
+  top: 0;
+  left: 20px;
+  width: calc(100% - 40px);
+  padding: 10px 10px 10px 150px;
+  opacity: 0;
+  transform: translateY(0%);
+  transition: transform 0.3s ease-in, opacity 0.3s ease-in;
+  z-index: 0;
+}
+
+.music-container.play .music-info {
+  opacity: 1;
+  transform: translateY(-100%);
+}
+
+.music-info h4 {
+  margin: 0;
+}
+
+.progress-container {
+  background: #ebc3fd !important; /* 与主体同色 */;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 0;
+  height: 4px;
+  width: 100%;
+}
+
+.progress {
+  background-color: #ff507c  !important;
+  border-radius: 5px;
+  height: 100%;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+/* 按钮颜色修复 */
+.action-btn {
+  color: hsl(267, 16%, 34%) !important; /* 强制颜色显示 */
+}
+
+.action-btn.action-btn-big {
+  color: hsl(267, 16%, 34%) !important;
+}
+
+/* 新增光标控制样式 */
+.music-container * {
+    user-select: none; /* 禁止文字选择 */
+    -webkit-tap-highlight-color: transparent; /* 移除点击高亮 */
+}
+
+.action-btn,
+.progress-container {
+    outline: none !important; /* 移除焦点轮廓 */
+    cursor: default !important; /* 使用默认光标 */
+}
+
+/* 修正进度条光标 */
+.progress-container {
+    cursor: pointer !important; /* 保留进度条的正常指针 */
+}
+
+#cursor-effect {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    pointer-events: none;
+    z-index: 501; /* 超过post-video的z-index(150) */
+    transform: translate(50px, 50px);
+    will-change: transform; /* 优化动画性能 */
+    filter: 
+        drop-shadow(0 0 5px #fff) 
+        drop-shadow(0 0 15px #ff0);
+}
+
+   </style>
+</head>
+
+<body>
+    <div class="shell">
+        <div class="cloud"></div>
+        <div class="cloud-right"></div>
+    </div>
+    
+
+    <script>
+
+
+
+        //文字雨11111111111111111111111111111111111
+        
+        function rain() {
+            const clouds = document.querySelectorAll('.cloud, .cloud-right');
+        }
+
+        function randomText() {
+            const text = '吕大少爷生日快乐';
+            const letter = text[Math.floor(Math.random() * text.length)];
+            return letter;
+        }
+        function rain() {
+            const clouds = document.querySelectorAll('.cloud, .cloud-right'); // 选中左右云层
+        clouds.forEach(cloud => {
+            const e = document.createElement('div');
+            const maxWidth = cloud.classList.contains('cloud-right') ? 320 : 300; // 根据容器调整宽度
+            const left = Math.floor(Math.random() * maxWidth);
+            const duration = Math.random() * 1;
+            const text = randomText();
+            
+            e.classList.add('text');
+            e.innerText = text;
+            e.style.left = left + 'px';
+            e.style.animationDuration = 1 + duration + 's';
+            cloud.appendChild(e);
+            
+            setTimeout(() => {
+                cloud.removeChild(e);
+            }, 2000);
+        });
+    }
+    setInterval(rain, 30);
+
+
+
+//音乐播放器22222222222222222222222222222222222
+let songIndex = 6; // 全局作用域，优先声明
+let musicContainer, playBtn, prevBtn, nextBtn, audio; // 全局声明音频相关变量
+let originalIndex = songIndex; // 真实播放索引
+let displayIndex = songIndex;  // 显示用索引
+// Song titles 歌曲标题
+const songs = ['一起享受片刻安宁😋','我很想知道此刻你在做什么🤔','你有没有什么没讲过的心事呢💬','guy🤨','hey!😏', 'Happy birthday!🥴(你居然真的翻到了这里，看来这首歌曲的确很难听🙈————————生日快乐我的老伙计😜）', '你也想起舞吗？🎶'];
+
+// 音乐播放器代码
+document.addEventListener('DOMContentLoaded', function() {
+// 初始加载固定音频和封面// 初始化所有DOM元素（移到DOMContentLoaded内部）
+        const audio = document.getElementById('audio');
+        const title = document.getElementById('title');
+        const playBtn = document.getElementById('play');
+        const prevBtn = document.getElementById('prev');
+        const nextBtn = document.getElementById('next');
+        const progress = document.getElementById('progress');
+        const musicContainer = document.getElementById('music-container');
+        // 在现有音乐播放器逻辑基础上新增功能
+        const progressContainer = document.getElementById('progress-container');
+        const musicInfo = document.querySelector('.music-info');
+        let songIndex = 6;
+        // 表单验证与跳转功能
+        const inputs = document.querySelectorAll('.e');
+        const enterBtn = document.getElementById('enterBtn');
+
+        enterBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        // 检查所有输入框是否都有值
+        let allFilled = true;
+        inputs.forEach(input => {
+            if (input.value.trim() === '') {
+                allFilled = false;
+                // 添加红色警示效果
+                input.style.borderBottom = '3px solid #ff0000';
+                setTimeout(() => {
+                    input.style.borderBottom = '3px solid rgb(80,80,170)';
+                }, 1000);
+            }
+        });
+
+        if (allFilled) {
+            // 跳转到指定网站（替换成实际URL）
+            window.location.href = 'https://robssbeer.github.io/-Robssbeer-.github.io/生日祝福.html';
+        } else {
+            alert('请填写所有身份验证信息！');
+        }
+    });
+
+
+        // 修改歌曲加载函数
+        function loadSong() {
+            title.textContent = songs[songIndex];
+            audio.src = `music/${songs[songIndex]}.mp3`;
+            audio.load();
+       
+        }
+
+        // 在togglePlay函数播放分支添加标题显示逻辑（修改后）
+function togglePlay() {
+    const isPlaying = !audio.paused;
+    if(isPlaying) {
+        audio.pause();
+        musicContainer.classList.remove('play');  // 移除播放状态
+    } else {
+        audio.play();
+        // 直接显示当前歌曲信息（新增部分）
+        title.textContent = songs[songIndex];
+        musicContainer.classList.add('play');    // 强制添加播放状态
+    }
+    playBtn.querySelector('i').className = isPlaying ? 'fas fa-play' : 'fas fa-pause';
+}
+
+        // 修改后的changeSong函数（方案一：完全禁止切换）
+        function changeSong(direction) {
+        // 保持原始索引不变
+        songIndex = originalIndex; 
+        loadSong();
+        if (musicContainer.classList.contains('play')) {
+        // 仅更新显示索引
+        displayIndex = (displayIndex + direction + songs.length) % songs.length;
+        // 更新界面显示
+        title.textContent = songs[displayIndex];  // 更新显示的标题    
+        // 无缝续播当前进度
+        const currentTime = audio.currentTime;
+        audio.src = `music/${songs[originalIndex]}.mp3`; // 强制保持原曲
+        audio.play().then(() => {
+        audio.currentTime = currentTime;
+        if (!audio.paused) audio.play();
+});
+}
+}
+        
+        // ======= 新增进度条拖动功能 =======
+        function setProgress(e) {
+            const width = this.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audio.duration;
+            audio.currentTime = (clickX / width) * duration;
+        }
+        progressContainer.addEventListener('click', setProgress);
+
+        function updateProgress(e) {
+            const { duration, currentTime } = e.srcElement;
+            progress.style.width = `${(currentTime / duration) * 100}%`;
+        }
+        
+        // ======= 新增歌曲信息显示功能 =======
+        function toggleMusicInfo(show) {
+            musicInfo.style.opacity = show ? 1 : 0;
+            musicInfo.style.transform = show ? 'translateY(-100%)' : 'translateY(0)';
+        }
+
+        // ======= 新增自动循环播放功能 =======
+        audio.addEventListener('ended', () => {
+            songIndex = (songIndex + 1) % songs.length;
+            loadSong();
+            audio.play();
+        });
+
+        audio.addEventListener('timeupdate', updateProgress);
+        playBtn.addEventListener('click', togglePlay);
+        prevBtn.addEventListener('click', () => changeSong(-1));
+        nextBtn.addEventListener('click', () => changeSong(1));
+        audio.addEventListener('ended', () => changeSong(1));
+    })
+        
+    // 初始化时隐藏歌曲信息
+    window.addEventListener('load', () => {
+    toggleMusicInfo(false);
+    });
+    
+    // 初始化
+    loadSong();
+
+
+        
+// 调整视频容器初始层级
+document.getElementById('video-container').style.zIndex = 100;
+
+// 在DOM加载时建立跟随系统
+window.addEventListener('DOMContentLoaded', () => {
+    const cursor = document.getElementById('cursor-effect');
+    cursor.style.display = 'block';
+
+    // GPU加速优化
+    cursor.style.transform = 'translateZ(0)';
+
+    let pos = { x: 0, y: 0 };
+    document.addEventListener('mousemove', e => {
+        pos.x = e.clientX;
+        pos.y = e.clientY;
+    });
+
+    function update() {
+        cursor.style.transform = `translate(
+            ${pos.x + 50}px,
+            ${pos.y + 50}px
+        ) translateZ(0)`; // 强制触发GPU加速
+        requestAnimationFrame(update);
+    }
+    update();
+});
+
+
+</script>
+
+
+
+
+    <div class="a">
+        <div class="b"></div>
+        <div class="c">
+            <div class="d">
+                <h1>身份识别🧐</h1>
+                <input type="text" class="e" placeholder="尊姓">
+                <input type="text" class="e" placeholder="大名">
+                <input type="password" class="e" placeholder="原神....？">
+                <a href="#" class="f">↑请证明你是人类</a>
+                <a href="#" class="g" id="enterBtn">☝进入奇妙小屋</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增音乐播放器 -->
+<div class="music-container" id="music-container" style="position: fixed; bottom: 20px; left: 20px; z-index: 1000;">
+    <div class="music-info" id="music-info">
+      <h4 id="title"></h4>
+      <div class="progress-container" id="progress-container">
+        <div class="progress" id="progress"></div>
+      </div>
+    </div>
+    <audio src="music/你也想起舞吗？🎶.mp3" id="audio" loop></audio>
+    <div class="img-container">
+      <img src="images/你也想起舞吗？🎶.jpg" alt="music-cover" id="cover" />
+    </div>
+    <div class="navigation">
+      <button id="prev" class="action-btn">
+        <i class="fas fa-backward"></i>
+      </button>
+      <button id="play" class="action-btn action-btn-big">
+        <i class="fas fa-play"></i>
+      </button>
+      <button id="next" class="action-btn">
+        <i class="fas fa-forward"></i>
+      </button>
+    </div>
+  </div>
+
+</body>
+</html>
