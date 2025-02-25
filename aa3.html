@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <meta charset="UTF-8">
+
+        <title>滚动视差</title>   
+
+    </head>
+
+    <style>
+
+        *{
+
+            padding:0;
+
+            margin:0;
+
+        }
+
+        .image_1{
+
+            background-image: url(images/1.jpg);
+
+            background-position: 0 0;
+
+            background-attachment: fixed;
+
+            background-size: cover;
+
+            height:680px;
+
+            width:100%;
+
+        }
+
+        .image_2{
+
+            background-image: url(images/2.jpg);
+
+            background-position: 0 0;
+
+            background-attachment: fixed;
+
+            background-size: cover;
+
+            height:680px;
+
+            width:100%;
+
+        }
+
+        .image_3{
+
+            background-image: url(images/3.jpg);
+
+            background-position: 0 0;
+
+            background-attachment: fixed;
+
+            background-size: cover;
+
+            height:680px;
+
+            width:100%;
+
+        }
+
+        .image_4{
+
+            background-image: url(images/4.jpg);
+
+            background-position: 0 0;
+
+            background-attachment: fixed;
+
+            background-size: cover;
+
+            height:680px;
+
+            width:100%;
+
+        }
+
+        .word{
+
+            position:relative;
+
+            top:480px;
+
+            font-size: 70px;
+
+            color:white;
+
+            text-align: center;
+
+            font-weight: bolder;
+            
+            font-family: 'STXingkai',cursive; 
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.7),
+        -1px -1px 0 rgba(255, 255, 255, 0.3); /* 立体阴影 */
+    letter-spacing: 3px;
+    transform: rotate(-1deg); /* 轻微倾斜效果 */
+    animation: brush 2s ease-in-out infinite alternate; /* 毛笔动画 */
+}
+
+@keyframes brush {
+    from { text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+    to { text-shadow: 4px 4px 6px rgba(0,0,0,0.8); }
+}
+
+.bg {    
+  background: linear-gradient(135deg, 
+    #FF6B6B 20%,  /* 珊瑚红 */ 
+    #4ECDC4 80%   /* 蓝绿色 */
+  );
+  color: rgb(180, 31, 31);
+  text-shadow: 10px 10px 10px rgba(0,0,0,0.3); /* 增加文字阴影提升可读性 */
+  height: 200px;
+  line-height: normal;
+  font-size: 30px;
+  font-weight: bolder;
+  text-align: center;
+  font-family: 'STHupo',cursive; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.5;
+  padding: 20px 0;
+}
+
+/* 在原有样式中追加 */
+.float-btn {
+    position: fixed !important;
+    bottom: -100px; /* 初始位置在视窗外 */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background: rgba(255,107,107,0.9);
+    border-radius: 50%;
+    box-shadow: 0 8px 20px rgba(255,107,107,0.3);
+    cursor: pointer;
+    transition: transform 0.3s ease,
+    background 0.3s ease,
+    x-shadow 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.float-btn.visible {
+    bottom: 40px !important; /* 显示时的最终位置 */
+}
+
+/* 添加底部填充样式 */
+.page-end {
+    height: 1px;
+    visibility: hidden;
+    margin-top: -1px; /* 消除微小间隙 */
+}
+
+/* 倒三角绘制 */
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 25px solid white;
+    margin-top: -5px;
+    transform-origin: 50% 30%;  /* 关键：设置旋转中心 */
+    transition: 
+        transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+        filter 0.3s ease;
+}
+
+/* 修改原有悬停动画部分 */
+.float-btn:hover {
+    background: rgba(255,77,77,0.95);
+    transform: translateX(-50%) scale(1.1); /* 移除按钮旋转 */
+    box-shadow: 0 12px 25px rgba(255,107,107,0.5);
+}
+
+.float-btn:hover .triangle {
+    transform: rotate(360deg) translateY(3px); /* 添加三角形旋转 */
+    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* 弹性过渡效果 */
+}
+
+/* 添加底部固定状态样式 */
+.float-btn.fixed {
+    position: fixed !important;
+    bottom: 40px !important;
+    top: auto !important;
+    animation: floatUp 0.5s ease-out;
+}
+@keyframes floatUp {
+    from { opacity: 0; transform: translate(-50%, 20px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+/* 移动端适配调整 */
+@media (max-width: 768px) {
+    .float-btn:hover .triangle {
+        transform: rotate(360deg) translateY(2px);
+    }
+
+    
+}
+
+/* 添加重要级层叠声明 */
+#cursor-effect {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    pointer-events: none;
+    z-index: 1000 !important; /* 超过post-video的z-index(150) */
+    transform: translate(50px, 50px);
+    will-change: transform; /* 优化动画性能 */
+    filter: 
+        drop-shadow(0 0 5px #fff) 
+        drop-shadow(0 0 15px #ff0);
+}
+    </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+     // 添加音频播放逻辑
+     const audio = document.getElementById('bgMusic');
+     audio.loop = true;
+        const floatBtn = document.querySelector('.float-btn');
+        const footer = document.querySelector('.bg:last-child');
+        let isFixed = false;
+// 尝试自动播放
+audio.play().catch(error => {
+
+});
+
+        // 添加填充元素到页面底部
+    const pageEnd = document.createElement('div');
+    pageEnd.className = 'page-end';
+    document.body.appendChild(pageEnd);
+    const bgMusic = document.getElementById('bgMusic');
+    const musicTip = document.getElementById('musicTip');
+    
+
+    // 用户首次点击时开始播放
+    function handleFirstInteraction() {
+        bgMusic.play().catch(() => {});
+        document.removeEventListener('click', handleFirstInteraction);
+        musicTip.style.display = 'none';
+    }
+    
+    // 尝试自动播放 (适用已与网站交互过的用户)
+    bgMusic.play().catch(() => {
+        // 自动播放失败时显示提示
+        musicTip.style.display = 'block';
+        document.addEventListener('click', handleFirstInteraction);
+    });
+
+    function checkPosition() {
+        const scrollThreshold = 100; // 滚动阈值
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const scrollPosition = window.scrollY || window.pageYOffset;
+
+        // 智能显示判断
+        const shouldShow = (scrollPosition + windowHeight) >= (documentHeight - scrollThreshold);
+        
+        // 使用classList切换可见状态
+        floatBtn.classList.toggle('visible', shouldShow);
+        
+        // 动态调整填充元素位置
+        pageEnd.style.marginTop = `${lastBg.offsetHeight + 100}px`;
+    }
+
+// 优化后的滚动监听
+let animationFrame;
+    window.addEventListener('scroll', () => {
+        if (animationFrame) cancelAnimationFrame(animationFrame);
+        animationFrame = requestAnimationFrame(checkPosition);
+    }, { passive: true });
+    
+        function updateButtonPosition() {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const footerRect = footer.getBoundingClientRect();
+
+            // 精确计算底部阈值
+            const threshold = 50;
+            const atBottom = documentHeight - (scrollTop + windowHeight) < threshold;
+            
+            // 添加可视性判断
+            const footerInView = footerRect.top < windowHeight;
+
+            if (atBottom || footerInView) {
+                if (!isFixed) {
+                    floatBtn.style.cssText = `
+                        position: fixed;
+                        bottom: 40px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        top: auto;
+                        opacity: 1;
+                    `;
+                    isFixed = true;
+                }
+            } else {
+                if (isFixed) {
+                    floatBtn.style.cssText = `
+                        position: absolute;
+                        top: ${footer.offsetTop + footer.offsetHeight + 40}px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        opacity: 0;
+                        pointer-events: none;
+                    `;
+                    isFixed = false;
+                }
+            }
+        }
+
+        // 优化节流函数
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const now = Date.now();
+            if (now - lastScroll > 100) {
+                updateButtonPosition();
+                lastScroll = now;
+            }
+        }, { passive: true });
+
+        // 初始化时确保按钮位置正确
+        setTimeout(updateButtonPosition, 500);
+        window.addEventListener('resize', updateButtonPosition);
+    
+    // 初始化执行
+    checkPosition();
+    window.addEventListener('resize', checkPosition);
+});
+
+// 调整视频容器初始层级
+document.getElementById('video-container').style.zIndex = 100;
+// 替换原有的DOMContentLoaded事件处理
+window.addEventListener('DOMContentLoaded', function() {
+    const cursor = document.getElementById('cursor-effect');
+    if (!cursor) return;
+    
+    cursor.style.display = 'block'; // 确保显示
+    cursor.style.opacity = '1';     // 强制不透明
+    
+    // 动态加载检查
+    console.log('https://i0.hdslb.com/bfs/new_dyn/ea2d33672377545ed62ccbf24541fd321712534844.png@264w_264h_1e_1c.avif', cursor.src); // 验证图片地址是否正确
+    
+    let pos = { x: 0, y: 0 };
+    let render = true; // 新增渲染开关
+    
+    // 新增错误处理
+    function handleMouseMove(e) {
+        pos.x = e.clientX;
+        pos.y = e.clientY;
+    }
+    document.addEventListener('mousemove', handleMouseMove);
+    
+    function update() {
+        if (!render) return;
+        
+        requestAnimationFrame(update); // 正确的方法调用顺序
+        
+        // 防止NaN值
+        const x = isNaN(pos.x) ? 0 : pos.x + 50;
+        const y = isNaN(pos.y) ? 0 : pos.y + 50;
+        
+        cursor.style.transform = `translate(${x}px, ${y}px)`;
+    }
+    update();
+    
+    // 增加性能优化
+    window.addEventListener('blur', () => render = false);
+    window.addEventListener('focus', () => {
+        render = true;
+        update();
+    });
+});
+
+
+
+</script>
+
+
+<body>
+    <img id="cursor-effect" src="无标题111 (2).png" style="display: none;">     
+    <div class="image_1">
+      <div class="word">
+          『小楼夜兮上表霄』
+      </div>
+    </div>
+    <div class="bg"> <div class="text-line">十六的夜晚 登上比高云霄的楼阁</div> 
+    <div class="text-line">"愿来日无忧 盼岁岁平安"</div> 
+</div>
+
+    <div class="image_2">
+      <div class="word">
+          『君与月兮共玲瑶』
+      </div>
+    </div>
+    <div class="bg"> <div class="text-line">希望你像月亮般纯洁活泼</div> 
+    <div class="text-line">"君子携翠萍 盈锦绣大道"</div> 
+</div>
+    <div class="image_3">
+      <div class="word">
+          『游京万灯直风起』
+      </div>
+    </div>
+    <div class="bg"> <div class="text-line">走在繁华的市街，今宵灯火，姹紫嫣红，乘风而起</div>
+    <div class="text-line">"望满腹才学 为国之大器"</div> 
+</div>
+    <div class="image_3">
+ 
+    <div class="image_4">
+      <div class="word">
+          『愿傍星斗众可昭』
+      </div>
+    </div> <!-- 修正后的闭合标签 -->
+    
+    <div class="bg"><div class="text-line">一起飞的更高更远，与星辰同耀夜空，世人可见</div>
+    <div class="text-line">"探新春旧故 梦白鹿青崖"</div> 
+    </div>
+    
+    
+   
+      
+    
+    
+<!-- 修改按钮位置和链接 -->
+<a href="https://robssbeer.github.io/-Robssbeer-.github.io/final.html" target="_blank" class="float-btn" aria-label="跳转链接">
+    <div class="triangle"></div>
+</a>
+<div class="page-end"></div>
+<!-- 添加在 </body> 前 -->
+<audio id="bgMusic" loop>
+    <source src="music/你也想起舞吗？🎶.mp3" type="audio/mpeg">
+    <source src="bgmusic.ogg" type="audio/ogg">
+</audio>
+<!-- 添加静音许可提示浮层 -->
+<div id="musicTip" style="position:fixed;bottom:20vh;left:50%;transform:translateX(-50%);background:#ffcdcd81;padding:15px;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.2);color:#333;">
+    点击页面任意位置继续播放音乐
+</div>
+</body>
+</html>
+
